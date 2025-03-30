@@ -1,0 +1,80 @@
+# Understanding `return` in JavaScript
+
+## 1. `return` in `.map()`
+The `.map()` method transforms each element in an array and returns a **new array**.
+
+### Example:
+```js
+const nums = [1, 2, 3, 4];
+
+const doubled = nums.map((num) => {
+    return num * 2; // Returning transformed value
+});
+
+console.log(doubled); // Output: [2, 4, 6, 8]
+```
+### Explanation:
+- `.map()` iterates over each `num` in `nums`.
+- The function **returns** `num * 2` for each element.
+- The `.map()` method collects all returned values into a **new array**.
+
+## 2. `return` in `.filter()`
+The `.filter()` method filters elements **based on a condition** and returns a **new array** with only the elements that pass the test.
+
+### Example:
+```js
+const nums = [1, 2, 3, 4, 5];
+
+const evens = nums.filter((num) => {
+    return num % 2 === 0; // Returning true for even numbers
+});
+
+console.log(evens); // Output: [2, 4]
+```
+### Explanation:
+- `.filter()` checks each `num`.
+- If the function **returns `true`**, the element is **included** in the new array.
+- If it **returns `false`**, the element is **skipped**.
+
+## 3. Common Mistake: Forgetting `return`
+If you forget to use `return` inside `{}`, the function will return `undefined`.
+
+```js
+const nums = [1, 2, 3, 4];
+
+const wrong = nums.map((num) => {
+    num * 2; // ❌ No return, so it returns undefined
+});
+
+console.log(wrong); // Output: [undefined, undefined, undefined, undefined]
+```
+✅ **Fix:**
+```js
+const correct = nums.map((num) => num * 2);
+console.log(correct); // Output: [2, 4, 6, 8]
+```
+
+## 4. Implicit vs. Explicit Return in Arrow Functions
+
+| Function Style         | Syntax | Needs `return`? |
+|----------------------|--------------------------------|--------------|
+| **Implicit Return**  | `(param) => expression`        | ❌ No |
+| **Explicit Return**  | `(param) => { return value; }` | ✅ Yes |
+
+### ✅ Implicit Return (No `return` keyword, but still works)
+```js
+const correct = [1, 2, 3, 4].map(num => num * 2);
+console.log(correct); // Output: [2, 4, 6, 8]
+```
+- The expression `num * 2` is **implicitly returned**.
+
+### ❌ Explicit Return (Must use `{}` if using `return`)
+```js
+const correct = [1, 2, 3, 4].map(num => { return num * 2; });
+console.log(correct); // Output: [2, 4, 6, 8]
+```
+- Since `{}` are used, **you must include `return`**.
+
+### 🚀 Summary:
+If you're using `{}` after `=>`, **always add `return`**.
+If you're using only an expression, **no need for `return`**!
