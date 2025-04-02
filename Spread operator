@@ -1,0 +1,29 @@
+/*The spread operator (...) in JavaScript allows you to expand elements of an iterable (like an array or object) into individual elements. It is commonly used for copying, merging, or passing elements.*/
+// Spread Operator Examples
+
+// 1. Copying an array
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1]; 
+console.log(arr2); // [1, 2, 3]
+
+// 2. Merging arrays
+const arr3 = [4, 5, 6];
+const mergedArr = [...arr1, ...arr3];
+console.log(mergedArr); // [1, 2, 3, 4, 5, 6]
+
+// 3. Copying and Merging Objects
+const obj1 = { name: "Tejaswani", age: 22 };
+const obj2 = { city: "Mumbai" };
+const newObj = { ...obj1, ...obj2 };
+console.log(newObj); // { name: "Tejaswani", age: 22, city: "Mumbai" }
+
+// 4. Using spread operator in function arguments
+function sum(a, b, c) {
+    return a + b + c;
+}
+const numbers = [1, 2, 3];
+console.log(sum(...numbers)); // 6
+
+// 5. Adding elements to an array
+const arr4 = [...arr1, 4, 5];
+console.log(arr4); // [1, 2, 3, 4, 5]
