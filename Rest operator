@@ -1,0 +1,32 @@
+The rest operator (...) in JavaScript allows you to collect multiple arguments or properties into an array or object.
+It looks identical to the spread operator (...), but its function is opposite—instead of expanding elements, it gathers them.
+
+// Rest and Spread Operators in JavaScript
+
+// 1. Using Rest Operator to collect arguments
+function sum(...numbers) {
+    return numbers.reduce((acc, num) => acc + num, 0);
+}
+console.log(sum(1, 2, 3, 4)); // Output: 10
+
+// 2. Destructuring an array with Rest
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log(first, second, rest); // Output: 1 2 [3, 4, 5]
+
+// 3. Using Rest Operator in Objects
+const person = { name: "Tejaswani", age: 22, city: "Mumbai", country: "India" };
+const { city, ...details } = person;
+console.log(details); // Output: { name: "Tejaswani", age: 22, country: "India" }
+
+// 4. Combining Rest & Spread - Modify Array
+function modifyArray(first, second, ...rest) {
+    return [...rest, first * 2, second * 2];
+}
+console.log(modifyArray(1, 2, 3, 4, 5)); // Output: [3, 4, 5, 2, 4]
+
+// 5. Combining Rest & Spread - Modify Object
+const updateUser = ({ city, ...rest }) => {
+    return { ...rest, city: "Pune", profession: "Developer" };
+};
+console.log(updateUser(person)); 
+// Output: { name: "Tejaswani", age: 22, country: "India", city: "Pune", profession: "Developer" }
