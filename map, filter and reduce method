@@ -1,0 +1,69 @@
+
+(*  1.map():
+A method that creates a new array by applying a function to each element of an existing array.
+It does not modify the original array.
+
+   2.filter():
+A method that creates a new array containing elements that satisfy a given condition.
+The condition is defined by a callback function that returns true or false.
+  . *)
+
+
+
+//Example://
+
+
+const mynum= [ 22, 34, 43, 56, 76, 88]
+const newnums= mynum.map((num)=> {     //Chaining:The process of combining multiple methods (map, filter, etc.) to simplify operations in a single statement.
+   return num*10})
+.map((num)=> num+1)
+.filter((num)=> num>=500)
+ console.log(newnums)
+
+
+
+//3.reduce:The reduce() method is used to accumulate values from an array into a single output (e.g., sum, product, average, etc.).
+(* accumulator → Stores the accumulated result.
+currentValue → The current array element being processed.
+initialValue (optional) → The starting value of the accumulator. *)
+
+//Example:-//
+
+const price_to_pay= [
+    {
+        Iname:"datascience",
+        price:"5000"
+    },
+    {
+        Iname:"dataanalytic",
+        price:"6000"
+    },
+    {
+        Iname:"webdev",
+        price:"200"
+    },
+    {
+        Iname:"devops",
+        price:"900"
+    },
+    {
+        Iname:"python_ml",
+        price:"500"
+    },
+
+]
+const totalp= price_to_pay.reduce((acc,item)=> acc +item.price,0)
+console.log(totalp)
+
+(*  When to Use reduce()?
+Summing values (e.g., total price, grades, salaries).
+
+Finding min/max values in an array.
+
+Flattening an array of arrays.
+
+Counting occurrences of elements in an array.
+
+Transforming data into objects.
+
+ *)
