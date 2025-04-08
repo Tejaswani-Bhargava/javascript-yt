@@ -1,0 +1,122 @@
+The `innerText` and `textContent` properties in JavaScript are used to get or set the text inside an HTML element, but they have key differences in how they work.
+
+### Key Differences Between `innerText` and `textContent`:
+
+1. **Rendering and Styling:**
+   - **`innerText`:**  
+     - `innerText` takes into account the **rendered** text, meaning it only returns the visible text as displayed on the page, after considering CSS styling (like `display: none` or `visibility: hidden`).
+     - It **triggers a reflow** (recalculating the layout) when accessed, which can make it slightly slower.
+     - **Newline characters** and whitespace are **adjusted** based on the visible formatting. For example, `innerText` respects line breaks (`<br>`) and ignores hidden text.
+   
+   - **`textContent`:**  
+     - `textContent` returns **all** the text content of an element, including text hidden with `display: none`, `visibility: hidden`, or text from hidden child elements.
+     - It **does not consider the styles** of the element and simply gives the raw text inside the element, including whitespace and newlines exactly as they appear in the HTML code.
+     - `textContent` is typically faster than `innerText` because it does not require recalculating layout or rendering.
+
+2. **Whitespace Handling:**
+   - **`innerText`:**  
+     - Adjusts whitespace and may collapse multiple spaces into a single space.
+     - It also **preserves the text's visible formatting**, like spacing, newlines, and breaks.
+   
+   - **`textContent`:**  
+     - Does **not adjust whitespace** and returns it exactly as it appears in the HTML source code, including all spaces, tabs, and newlines.
+
+3. **Performance:**
+   - **`innerText`:**  
+     - It is generally **slower** because it needs to calculate the layout and style of the element to get the rendered text.
+   
+   - **`textContent`:**  
+     - It is typically **faster** since it doesn't require layout recalculation and only returns the raw text.
+
+4. **Browser Support and Use Cases:**
+   - **`innerText`:**  
+     - `innerText` is supported in most modern browsers but was **originally specific to Internet Explorer**. It’s more suited for cases where you need to access or modify the visible, rendered text.
+   
+   - **`textContent`:**  
+     - `textContent` is a standard property and works in all browsers, including Internet Explorer 9 and later. It’s generally the more reliable and recommended choice when working with raw text content.
+
+---
+
+### Examples to Illustrate the Differences
+
+#### Example 1: Whitespace and Styling Differences
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innerText vs textContent</title>
+</head>
+<body>
+    <div id="example">
+        This is some text.
+        <span style="display: none;">This is hidden text.</span>
+        <p>Another paragraph.</p>
+    </div>
+
+    <script>
+        let exampleElement = document.getElementById("example");
+
+        console.log("innerText: ", exampleElement.innerText);
+        console.log("textContent: ", exampleElement.textContent);
+    </script>
+</body>
+</html>
+```
+
+#### Output:
+```javascript
+innerText:  This is some text.
+Another paragraph.
+textContent:  This is some text.
+This is hidden text.
+Another paragraph.
+```
+
+- `innerText` excludes the hidden text (the span with `display: none`).
+- `textContent` includes everything, including the hidden text.
+
+#### Example 2: Whitespace Handling
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitespace Handling</title>
+</head>
+<body>
+    <div id="example">
+        This     is      some    text.
+    </div>
+
+    <script>
+        let exampleElement = document.getElementById("example");
+
+        console.log("innerText: ", exampleElement.innerText); // Adjusted spaces
+        console.log("textContent: ", exampleElement.textContent); // Raw spaces
+    </script>
+</body>
+</html>
+```
+
+#### Output:
+```javascript
+innerText:  This is some text.
+textContent:  This     is      some    text.
+```
+
+- `innerText` collapses and adjusts the spaces, while `textContent` preserves the exact spacing.
+
+### When to Use Which?
+- **Use `textContent`** when:
+  - You need the **raw text content** of an element.
+  - You don't care about hidden text or styling.
+  - You want better **performance**.
+  
+- **Use `innerText`** when:
+  - You need to work with **visible text** as it appears on the page (taking into account CSS).
+  - You want to preserve the appearance of text, including spaces and line breaks based on the browser rendering.
+
+In general, **`textContent`** is recommended in most cases due to its reliability and better performance. Use **`innerText`** when working with **rendered text** that may be affected by CSS styles.
