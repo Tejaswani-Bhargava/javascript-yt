@@ -1,0 +1,81 @@
+
+## 🔹 What is Event Propagation?
+
+When you interact with a webpage (like clicking a button inside a div), the browser needs to decide **which element's event handler runs first**.  
+There are two main phases:
+
+1. **Capturing Phase (Capture/Trickle Down)** – from `window ➝ document ➝ html ➝ body ➝ ... ➝ target`
+2. **Bubbling Phase (Bubble Up)** – from `target ➝ ... ➝ body ➝ html ➝ document ➝ window`
+
+---
+
+## 🔸 1. Event Bubbling (Default)
+
+- The event starts at the **target element** and **bubbles up** to its ancestors.
+- This is the **default** behavior when you use `addEventListener`.
+
+### ✅ Example: Bubbling
+
+```html
+<div id="parent">
+  <button id="child">Click Me</button>
+</div>
+
+<script>
+  document.getElementById("parent").addEventListener("click", () => {
+    alert("Parent clicked (bubbling)");
+  });
+
+  document.getElementById("child").addEventListener("click", () => {
+    alert("Child clicked");
+  });
+</script>
+```
+
+🟡 If you click the button, you'll see:
+- `Child clicked`
+- `Parent clicked (bubbling)`
+
+---
+
+## 🔸 2. Event Capturing (Optional)
+
+- The event starts from the top (`document`) and goes **down to the target**.
+- You enable this by setting the third parameter of `addEventListener` to `true`.
+
+### ✅ Example: Capturing
+
+```javascript
+document.getElementById("parent").addEventListener(
+  "click",
+  () => {
+    alert("Parent clicked (capturing)");
+  },
+  true // <--- this makes it run during the capture phase
+);
+```
+
+🟡 Now, if you click the button, you’ll see:
+- `Parent clicked (capturing)`
+- `Child clicked`
+
+---
+
+## 🔸 Stop Propagation
+
+To **stop the event** from going further, use:
+
+```javascript
+event.stopPropagation();
+```
+
+This works for both bubbling and capturing.
+
+---
+
+## 🧠 Summary Table
+
+| Term          | Direction     | Default? | Use `addEventListener(..., true)`? |
+|---------------|----------------|----------|--------------------------|
+| Capturing     | Top ➝ Target   | ❌       | ✅ Yes                    |
+| Bubbling      | Target ➝ Top   | ✅ Yes   | ❌ No                     |
