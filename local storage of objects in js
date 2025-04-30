@@ -1,0 +1,77 @@
+🧩 Step 1: Select HTML elements
+js
+Copy code
+const nameElement = document.querySelector('.name-tag');
+const nameInput = document.querySelector('.name');
+const ageElement = document.querySelector('.age-tag');
+const ageInput = document.querySelector('.age');
+nameElement and ageElement are the <span> tags where the name and age will be displayed.
+
+nameInput and ageInput are the <input> fields where the user types their name and age.
+
+🧩 Step 2: Load data from localStorage or create default object
+js
+Copy code
+let myData = JSON.parse(localStorage.getItem('myData')) || {
+    name: '',
+    age: ''
+};
+This tries to load previously saved data from localStorage using key 'myData'.
+
+If nothing was saved before (i.e. returns null), it creates a default empty object:
+
+js
+Copy code
+{ name: '', age: '' }
+🧩 Step 3: Set initial values in input and span
+js
+Copy code
+nameInput.value = myData.name;
+ageInput.value = myData.age;
+nameElement.innerText = myData.name;
+ageElement.innerText = myData.age;
+This fills in:
+
+The <input> fields with previously stored values.
+
+The <span> tags so the user sees “My name is X” and “I am Y”.
+
+🧩 Step 4: Handle changes to name input
+js
+Copy code
+nameInput.addEventListener('input', (e) => {
+    myData.name = e.target.value;
+    localStorage.setItem('myData', JSON.stringify(myData));
+    nameElement.innerText = myData.name;
+});
+When the user types in the name input:
+
+Update the myData.name property.
+
+Save the updated object to localStorage using JSON.stringify().
+
+Immediately update the <span> so the displayed name changes live.
+
+🧩 Step 5: Handle changes to age input
+js
+Copy code
+ageInput.addEventListener('input', (e) => {
+    myData.age = e.target.value;
+    localStorage.setItem('myData', JSON.stringify(myData));
+    ageElement.innerText = myData.age;
+});
+Similar to name:
+
+Update myData.age.
+
+Save to localStorage.
+
+Update the <span> live.
+
+📦 Summary
+Uses a single myData object to store both name and age.
+
+Ensures data stays saved even after refreshing the page.
+
+Keeps both input fields and display <span>s updated in real-time.
+
