@@ -1,0 +1,28 @@
+const resolvebtn = document.querySelector('#resolve-btn')
+const rejectbtn = document.querySelector('#reject-btn')
+
+
+
+
+const p= new Promise((resolve, reject) => {
+   
+    resolvebtn.addEventListener('click',()=>{
+        resolve('promise resolved')
+    })
+
+
+      rejectbtn.addEventListener('click',()=>{
+        resolve('promise rejected')
+    })
+} ) 
+
+p.then((data) => {
+    console.log(data);
+    return 111;
+}).catch((err) => {
+    console.log(err);
+}).then((data) => {
+    console.log(data);
+    
+})
+
