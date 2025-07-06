@@ -1,0 +1,37 @@
+// function getBirthYear(){
+    
+//             return new Date().getFullYear() - this.age
+        
+// }
+
+
+
+// function createUser(fname, lname, age){
+//     const user = {
+//         fname, 
+//         lname,
+//         age,
+//         getBirthYear ,
+//     }
+//     return user
+// }
+
+// const user1 = createUser('aman', 'm' , 22)
+// console.log(user1.getBirthYear())
+function createUser (firstName, lastName, age){
+    this. firstName = firstName
+    this .lastName = lastName
+    this .age=  age
+}
+
+createUser.prototype.getBirthYear =function(){
+    return new Date().getfullYear()- this .age
+}
+const user1= new createUser('aman', 'singh', 14)
+console.log(user1);
+
+// function sayhi(){
+//     return console.log('this') 
+// }
+
+// console.log( new sayhi());
